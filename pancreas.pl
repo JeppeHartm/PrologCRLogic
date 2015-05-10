@@ -1,5 +1,6 @@
 % pancreas.pl: all relations depicted in the pancreas relationship diagram
-
+:- module(pancreas,[isa_def/2,ae_def/3]).
+isa_def(X,Y) :- isa(X,Y).
 % Generalization relations
 
 isa(centroacinar_cell,exocrine_pancreatic_cell).
@@ -20,7 +21,20 @@ isa(embryonic_stem_cell,stem_cell).
 isa(stem_cell,cell).
 isa(neuronal_Schwann_cell,cell).
 
+% Controversial generalizations (verified by 2 independent students of medicine)
+
+isa(pancreatic_polypeptide,hormone).
+isa(somatostatin,hormone).
+isa(gastrin,hormone).
+isa(insulin,hormone).
+isa(glucagon,hormone).
+
+isa(digestive_enzyme,enzyme).
+isa(bicarbonate_ion,enzyme).
+
+
 % Parthood relations
+ae_def(X,R,Y) :- ae(X,R,Y).
 
 ae(nervous_system,haspart,neuronal_Schwann_cell).
 ae(pancreas,haspart,exocrine_pancreas).
@@ -45,17 +59,5 @@ ae(beta_cell,secretes,insulin).
 ae(gamma_cell,secretes,gastrin).
 ae(gamma_cell,secretes,somatostatin).
 ae(pp-cell,secretes,pancreatic_polypeptide).
-
-% Controversial generalizations (verified by 2 independent students of medicine)
-
-isa(pancreatic_polypeptide,hormone).
-isa(somatostatin,hormone).
-isa(gastrin,hormone).
-isa(insulin,hormone).
-isa(glucagon,hormone).
-
-isa(digestive_enzyme,enzyme).
-isa(bicarbonate_ion,enzyme).
-
 % Since we are modelling a closed system we could specify that all hormones come from endocrine cells and all enzymes come from exocrine cells
 % However this would require an additional construct letting us tell that some relationship is exclusive to a class, which we do not have in CRL
